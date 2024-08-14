@@ -1,0 +1,693 @@
+#include<stdlib.h>
+#include<stdio.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+struct node* head;
+struct node* create(struct node* head)
+{
+    int x;
+    struct node *newnode,*temp;//*head=NULL;
+   scanf("%d",&x); 
+while(x!=-1)
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    if(head==NULL)
+    {
+        head=temp=newnode;
+    }
+    else
+    {
+        temp->next=newnode;
+        temp=newnode;
+    }
+    scanf("%d",&x);
+    
+} 
+    return head;
+}
+struct node* Reverse(struct node* head)
+{
+    struct node *prenode,*temp,*nextnode;
+    prenode=NULL;
+    nextnode=temp=head;
+    while(nextnode!=NULL)
+    {
+        nextnode=nextnode->next;
+        temp->next=prenode;
+        prenode=temp;
+        temp=nextnode;
+        
+    }
+     head=prenode;
+     return head;
+}
+struct node* insertBegging(struct node* head, int data )
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    
+    newnode->data=data;
+    newnode->next=head;
+    
+    head=newnode; 
+    return head;
+}
+void insertEnd(struct node *head , int data)
+{
+    struct node *newnode,*temp;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    temp=head;
+    newnode->data=data;
+    if(head==NULL)
+    {
+        head=temp=newnode;
+    }
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=newnode;
+    
+}
+void Location(struct node *head , int data)
+{
+    int choice;
+    struct node *newnode,*temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    
+    int count=0,i=0,pos;
+    printf("Enter the position\t");
+    scanf("%d",&pos);
+    
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            temp=temp->next;
+            i++;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+}
+void Display(struct node *head)
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    
+}
+struct node *DeleteBeg(struct node *head)
+{
+    struct node *temp;
+    temp=head;
+    head=head->next;
+    free(temp);
+    return head;
+}
+void DeleteEnd(struct node *head)
+{
+    struct node *temp,*prenode;
+    temp=head;
+    while(temp->next!=NULL)
+    {
+        prenode=temp;
+        temp=temp->next;
+    }
+    if(temp==head)
+    {
+        head=NULL;
+    }
+    else
+    {
+        prenode->next=NULL;
+        free(temp);
+    }
+}
+void Deletepos(struct node *head)
+{
+    struct node *temp,*nextnode;
+    int i=1,pos,count=0;
+    printf("Delete position\t");
+    scanf("%d",&pos);
+    temp=head;
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            
+            temp=temp->next;
+            i++;
+        }
+        nextnode=temp->next;
+        temp->next=nextnode->next;
+        free(nextnode);
+}
+}
+int main() {
+    struct node *newnode,*temp,*head=NULL;
+head=create(head);
+head=insertBegging(head,10);
+insertEnd(head,70);
+Location(head,23);
+//head=Reverse(head);
+Display(head);
+//head=DeleteBeg(head);
+//DeleteEnd(head);
+//Display(head);
+Deletepos(head);
+Display(head);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Updated one SLL:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#include<stdlib.h>
+#include<stdio.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+struct node* head;
+struct node *tail;
+void create()
+{
+    int x;
+    struct node *newnode,*temp;//*head=NULL;
+   scanf("%d",&x); 
+while(x!=-1)
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    if(head==NULL)
+    {
+        head=tail=newnode;
+    }
+    else
+    {
+        tail->next=newnode;
+        tail=newnode;
+    }
+    scanf("%d",&x);
+    
+} 
+   // return head;
+}
+void Reverse()
+{
+    struct node *prenode,*temp,*nextnode;
+    prenode=NULL;
+    nextnode=temp=head;
+    while(nextnode!=NULL)
+    {
+        nextnode=nextnode->next;
+        temp->next=prenode;
+        prenode=temp;
+        temp=nextnode;
+        
+    }
+     head=prenode;
+   //  return head;
+}
+void insertBegging(int data )
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    
+    newnode->data=data;
+    newnode->next=head;
+    
+    head=newnode; 
+   
+}
+void insertEnd(int data)
+{
+    struct node *newnode,*temp;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    temp=head;
+    newnode->data=data;
+    if(head==NULL)
+    {
+        head=temp=tail=newnode;
+    }
+    else{
+     tail->next=newnode;
+     tail=newnode;
+    }
+    
+}
+void Location(int data)
+{
+    int choice;
+    struct node *newnode,*temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    
+    int count=0,i=0,pos;
+    printf("Enter the position\t");
+    scanf("%d",&pos);
+    
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            temp=temp->next;
+            i++;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+}
+void Display()
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+    
+}
+void DeleteBeg()
+{
+    struct node *temp;
+    temp=head;
+    head=head->next;
+    free(temp);
+   // return head;
+}
+void DeleteEnd()
+{
+    struct node *temp,*prenode;
+    temp=head;
+    while(temp->next!=NULL)
+    {
+        prenode=temp;
+        temp=temp->next;
+    }
+    if(temp==head)
+    {
+        head=tail=NULL;
+    }
+    else
+    {
+        tail=prenode;
+        tail->next=NULL;
+        free(temp);
+    }
+}
+void Deletepos()
+{
+    struct node *temp,*nextnode;
+    int i=1,pos,count=0;
+    printf("Delete position\t");
+    scanf("%d",&pos);
+    temp=head;
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            
+            temp=temp->next;
+            i++;
+        }
+        nextnode=temp->next;
+        temp->next=nextnode->next;
+        free(nextnode);
+}
+}
+struct node *head=NULL;
+int main() {
+   // struct node *newnode,*temp;//*head=NULL;
+create();
+//insertBegging(10);
+//insertEnd(70);
+//Location(23);
+Reverse();
+Display();
+//Reverse();
+//Display();
+//DeleteBeg();
+//Display();
+//DeleteEnd();
+//Display();
+
+//Deletepos();
+//Display();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Updated SLL :
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#include<stdlib.h>
+#include<stdio.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+struct node* head;
+struct node *tail;
+void create()
+{
+    int x;
+    struct node *newnode,*temp;//*head=NULL;
+   scanf("%d",&x); 
+while(x!=-1)
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    if(head==NULL)
+    {
+        head=tail=newnode;
+    }
+    else
+    {
+        tail->next=newnode;
+        tail=newnode;
+    }
+    scanf("%d",&x);
+    
+} 
+   // return head;
+}
+void Reverse()
+{
+    struct node *prenode,*temp,*nextnode;
+    prenode=NULL;
+    nextnode=temp=head;
+    while(nextnode!=NULL)
+    {
+        nextnode=nextnode->next;
+        temp->next=prenode;
+        prenode=temp;
+        temp=nextnode;
+        
+    }
+     head=prenode;
+   //  return head;
+}
+void insertBegging(int data )
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    
+    newnode->data=data;
+    newnode->next=head;
+    
+    head=newnode; 
+   
+}
+void insertEnd(int data)
+{
+    struct node *newnode,*temp;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    temp=head;
+    newnode->data=data;
+    if(head==NULL)
+    {
+        head=temp=tail=newnode;
+    }
+    else{
+     tail->next=newnode;
+     tail=newnode;
+    }
+    
+}
+void Location(int data)
+{
+    int choice;
+    struct node *newnode,*temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    
+    int count=0,i=1,pos;
+    printf("Enter the position\t");
+    scanf("%d",&pos);
+    
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else if (pos==1)
+    {
+        insertBegging(data);
+    }
+    else if(pos==count)
+    {
+        insertEnd(data);
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            temp=temp->next;
+            i++;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+}
+void Display()
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+    
+}
+void DeleteBeg()
+{
+    struct node *temp;
+    temp=head;
+    head=head->next;
+    free(temp);
+   // return head;
+}
+void DeleteEnd()
+{
+    struct node *temp,*prenode;
+    temp=head;
+    while(temp->next!=NULL)
+    {
+        prenode=temp;
+        temp=temp->next;
+    }
+    if(temp==head)
+    {
+        head=tail=NULL;
+    }
+    else
+    {
+        tail=prenode;
+        tail->next=NULL;
+        free(temp);
+    }
+}
+void Deletepos()
+{
+    struct node *temp,*nextnode;
+    int i=1,pos,count=0;
+    printf("Delete position\t");
+    scanf("%d",&pos);
+    temp=head;
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else if(pos==1)
+    {
+        DeleteBeg();
+    }
+    else if(pos==count)
+    {
+        DeleteEnd();
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            
+            temp=temp->next;
+            i++;
+        }
+        nextnode=temp->next;
+        temp->next=nextnode->next;
+        free(nextnode);
+}
+}
+struct node *head=NULL;
+int main() {
+   // struct node *newnode,*temp;//*head=NULL;
+create();
+Display();
+//insertBegging(10);
+//insertEnd(70);
+Location(23);
+//Reverse();
+Display();
+//Reverse();
+//Display();
+//DeleteBeg();
+//Display();
+//DeleteEnd();
+//Display();
+
+//Deletepos();
+//Display();
+
+}
+
+
+
+
+
+
+
+
+
+

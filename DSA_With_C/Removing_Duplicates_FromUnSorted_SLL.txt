@@ -1,0 +1,89 @@
+
+
+
+Removing Duplicates from Un-Sorted linkedList :
+
+
+
+
+
+
+#include<stdlib.h>
+#include<stdio.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+struct node* head;
+struct node* tail;
+
+void create()
+{
+    int x;
+    struct node *newnode,*temp;//*head=NULL;
+   scanf("%d",&x); 
+while(x!=-1)
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    if(head==NULL)
+    {
+        head=tail=newnode;
+    }
+    else
+    {
+        tail->next=newnode;
+        tail=newnode;
+    }
+    scanf("%d",&x);
+    
+} 
+   // return head;
+}
+
+void RemoveDuplicate()
+{
+struct node *p1,*p2,*dup;
+p1=head;
+while(p1!=NULL && p1->next!=NULL)
+{
+    p2=p1;
+    while(p2->next!=NULL)
+    {
+        if(p1->data==p2->next->data)
+        {
+            dup=p2->next;
+            p2->next=p2->next->next;
+            free(dup);
+        }
+        else{
+            p2=p2->next;
+        }
+    }
+    p1=p1->next;
+}
+}
+
+void Display()
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+    
+}
+
+
+int main()
+{
+create();
+Display();
+
+RemoveDuplicate();
+Display();
+}
+

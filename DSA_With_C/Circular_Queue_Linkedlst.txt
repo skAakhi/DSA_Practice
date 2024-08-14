@@ -1,0 +1,105 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+struct node *front=0;
+struct node *rear=0;
+
+void enQ(int x)
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->next=0;
+
+   if(front==0 && rear==0)
+   {
+       front=rear=newnode;
+       rear->next=front;
+       
+   }
+   else{
+       rear->next=newnode;
+       rear=newnode;
+       rear->next=front;
+       
+   }
+}
+
+void DQ(){
+    struct node *item=front;
+    if(front==0 && rear==0)
+    {
+        printf("Underflow condition");
+    }
+      printf("Deleted item is : %d\n",front->data);
+    if(front==rear)
+    {
+        front=rear=0;
+        free(item);
+    }
+    else{
+        item=front;
+       // printf("Deleted item is : %d\n",front->data);
+        front=front->next;
+        rear->next=front;
+        free(item);
+    }
+}
+ 
+ void display()
+ {
+     struct node *temp;
+     temp=front;
+     // For testing ----> temp=rear;
+     if(front==0 && rear==0)
+     {
+         printf("Queue is empty\n");
+     }
+     
+     else{
+         while(temp->next!=front)
+        //For testing----> while(temp->next!=rear)
+         {
+             printf("%d\n",temp->data);
+             temp=temp->next;
+         }
+         printf("%d\n",temp->data);
+         
+     }
+ }
+ 
+ void peek()
+ {
+     if(front==0 && rear==0)
+     {
+         printf("Underflow condition\n");
+     }
+     else{
+         printf("%d\n",front->data);
+     }
+ }
+int main() {
+
+    enQ(10);
+    enQ(20);
+    enQ(30);
+    enQ(40);
+    enQ(50);
+    enQ(60);
+    printf("1 completed\n");
+    display();
+    printf("2 completed\n");
+    DQ();
+    printf("3 completed\n");
+    display();
+    printf("4 completed \n");
+    peek();
+   // printf("4 completed \n");
+    
+    return 0;
+}

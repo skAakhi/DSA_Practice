@@ -1,0 +1,332 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+
+int main() {
+//     int *p;
+//     int* q;
+//     int a=10,b=9;
+//     p=&a;
+//     q=&b;
+//     //*p=*q;
+//   // q=p;
+    
+    
+//     printf("%d\t%d",*p,*q);
+
+
+//Double pointer:
+
+int a=10;
+int* p=&a;
+int** q=&p;
+int*** r=&q;
+
+printf("%u\n",&a);
+printf("%d\n",p);
+printf("%d\n",*p);
+printf("%u\n",&p);
+printf("%d\n",q);
+
+printf("%d",**q);
+printf("%d",***r);
+
+
+//Void pointers:
+
+// int a=10;
+// int b=11;
+// char c='A';
+// void *q=&c;
+// void *p=&a;
+// //void *p=&b;
+
+// printf("%d",*(int*)p);
+// printf("%c",*(char*)q);
+
+
+
+//Arrays of pointer:
+// int a=10,b=11,c=12;
+// int *p[3]={&a,&b,&c};
+
+// for(int i=0;i<3;i++)
+//   printf("%d\t",*p[i]);
+
+
+
+//Case Alphbetic subtracting task 
+// char ch[10]="hello";
+// int result=0;
+// int length=strlen(ch);
+// printf("%d\n",length);
+
+// for(int st=0,end=length;st<end-1;st++,end--)
+// {
+//     if((ch[st]>=65 && ch[st]<=90)||(ch[st]>=97 && ch[st]<=122))
+//     {
+//         result+=abs(ch[st]-ch[end]);
+//     }
+// }
+// printf("%d",result);
+
+
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+Structures:
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+struct Student{
+    int id;
+    char name[20];
+    
+};//s1;
+//struct Student s1;
+struct Student s1[2];
+int main() {
+    //struct Student s1;
+    
+    // scanf("%d",&s1.id);
+    // printf("%d",s1.id);
+    
+    //Arrays of structure
+    for(int i=0;i<2;i++)
+    {
+    scanf("%d\n%[^\n]s",&s1[i].id,s1[i].name);
+    }
+    
+    
+    for(int i=0;i<2;i++){
+    printf("%d\n%s\n",s1[i].id,s1[i].name);
+    }
+}
+
+
+
+
+
+
+
+pointers to arrays:
+
+#include <stdio.h>
+//Pointers to structures
+struct Student{
+    int id;
+    char name[20];
+    
+}s1[2];
+int main() {
+ //  struct Student *p=&s1;
+ struct Student *p[2];
+ 
+ for(int i=0;i<2;i++)
+ {
+     scanf("%d\n%s",&s1[i].id,s1[i].name);
+     p[i]=&s1[i];
+ }
+ 
+ for(int i=0;i<2;i++)
+ {
+     printf("%d\n%s\n",p[i]->id,p[i]->name);
+ }
+   
+//   scanf("%d%s",&p->id,p->name);
+//   printf("%d\n%s",p->id,p->name);
+
+// for(int i=0;i<2;i++)
+// {
+//     scanf("%d%s",&p[i]->id,p[i]->name);
+    
+// }
+   
+    //printf("Try programiz.pro");
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+Self-Referential Structures
+
+struct structure_name {
+    data_type member1;
+    data_type member2;
+    struct structure_name* str;
+}
+
+
+// C program to illustrate the self referential structures 
+#include <stdio.h> 
+
+// structure template 
+typedef struct str { 
+	int mem1; 
+	int mem2; 
+	struct str* next; 
+}str; 
+
+// driver code 
+int main() 
+{ 
+	str var1 = { 1, 2, NULL }; 
+	str var2 = { 10, 20, NULL }; 
+
+	// assigning the address of var2 to var1.next 
+	var1.next = &var2; 
+
+	// pointer to var1 
+	str *ptr1 = &var1; 
+
+	// accessing var2 members using var1 
+	printf("var2.mem1: %d\nvar2.mem2: %d", ptr1->next->mem1, 
+		ptr1->next->mem2); 
+
+	return 0; 
+}
+
+
+
+
+
+
+
+// C program to illustrate structure padding and packing 
+#include <stdio.h> 
+
+// structure with padding 
+struct str1 { 
+	char c; 
+	int i; 
+}; 
+
+struct str2 { 
+	char c; 
+	int i; 
+} __attribute((packed))__ ; // using structure packing 
+
+// driver code 
+int main() 
+{ 
+
+	printf("Size of str1: %d\n", sizeof(struct str1)); 
+	printf("Size of str2: %d\n", sizeof(struct str2)); 
+	return 0; 
+}
+
+
+//#pragma pack(1)[if you use this will pack on all structures of members ]->to reduce un_used memory size of structure members
+//#pragma pack(0)[if you use this will pack off all structures of members ]->to reduce un_used memory size of structure members
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dynamic memory location:
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+   int n,n2;
+   int *p=NULL;
+   int *q;
+   
+ //  printf("%d",*p);
+//   scanf("%d",&n);
+   
+//   p=(int*)malloc(n*sizeof(int*));
+   
+//   for(int i=0;i<n;i++)
+//   {
+//       scanf("%d",(p+i));
+//   }
+//     for(int i=0;i<n;i++)
+//   {
+//       printf("%d\t",*(p+i));
+//   }
+  
+//   p=(int*)calloc(n,sizeof(int*));
+   
+//   for(int i=0;i<n;i++)
+//   {
+//       scanf("%d",(p+i));
+//   }
+//     for(int i=0;i<n;i++)
+//   {
+//       printf("%d\t",*(p+i));
+//   }
+//   for(int i=0;i<n;i++)
+//   {
+//       printf("%d\t",*(p+i));
+//   }
+//   free(p);
+//   for(int i=0;i<n;i++)
+//   {
+//       printf("%d\t",*(p+i));
+//   }
+
+// scanf("%d",&n2);
+// int *p1=(int*)realloc(p,n2*sizeof(int));//NULL if you place in place of p pointer , the pointer its associated array elements will be deleted
+// for(int i=n;i<n2;i++)
+// {
+//     scanf("%d",(p1+i));
+// }
+//  for(int i=0;i<n2;i++)
+//   {
+//       printf("%d\t",*(p1+i));
+//   }
+  
+   
+   
+
+    return 0;
+}

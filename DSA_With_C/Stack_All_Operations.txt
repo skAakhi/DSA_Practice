@@ -1,0 +1,291 @@
+// stack at static time using arrays
+#include <stdio.h>
+#define n  5
+int stack[n];
+int top=-1;
+
+void push(int x)
+{
+    //int x;
+    //scanf("%d",&x);
+    if(top==n-1)
+    {
+        printf("Overflow");
+    }
+    else
+    {
+        top++;
+        stack[top]=x;
+    }
+}
+
+void pop()
+{
+    int item;
+    if(top==-1)
+    {
+        printf("Underflow");
+    }
+    else
+    {
+        item=stack[top];
+        top--;
+        printf("%d",item);
+       // top--;
+    }
+
+}
+
+void peek()
+{
+    if(top==-1)
+    {
+        printf("Underflow");
+    }
+    else
+    {
+        printf("%d",stack[top]);
+    }
+}
+
+void display()
+{
+    int i;
+    for(i=top;i>=0;i--)
+    {
+        printf("%d\t",stack[i]);
+    }
+}
+
+
+int main() {
+
+   push(10);
+   push(11);
+   push(12);
+   printf("hai\n");
+  display();
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[using do_while loop we can switch our choice]
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+int main() {
+  int ch;
+  printf("push : 1 | pop : 2 | peek : 3 | display : 4\n");
+  do{
+      scanf("%d",&ch);
+      
+     switch(ch)
+     {
+         case 1: push();
+                 break;
+         case 2: pop();
+                 break;
+         case 3: peek();
+                 break;
+         case 4: display();
+                 break;
+        default: printf("Invalid input\n");
+                 break;
+    
+     }
+  }
+  while(ch!=0);
+  
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+// stack at static time using arrays
+#include <stdio.h>
+#define n  5
+int stack[n];
+int top=-1;
+
+void push()
+{
+    int x;
+    scanf("%d",&x);
+    if(top==n-1)
+    {
+        printf("Overflow");
+    }
+    else
+    {
+        top++;
+        stack[top]=x;
+    }
+}
+
+void pop()
+{
+    int item;
+    if(top==-1)
+    {
+        printf("Underflow");
+    }
+    else
+    {
+        item=stack[top];
+        top--;
+        printf("%d",item);
+       // top--;
+    }
+    printf("\n");
+
+}
+
+void peek()
+{
+    if(top==-1)
+    {
+        printf("Underflow");
+    }
+    else
+    {
+        printf("%d",stack[top]);
+    }
+    printf("\n");
+}
+
+void display()
+{
+    int i;
+    for(i=top;i>=0;i--)
+    {
+        printf("%d\t",stack[i]);
+    }
+    printf("\n");
+}
+
+
+// int main() {
+
+//   push(10);
+//   push(11);
+//   push(12);
+//   printf("hai\n");
+//   display();
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// [using do_while loop we can switch our choice]
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+int main() {
+  int ch;
+  printf("push : 1 | pop : 2 | peek : 3 | display : 4\n");
+  do{
+      scanf("%d",&ch);
+      
+     switch(ch)
+     {
+         case 1: push();
+                 break;
+         case 2: pop();
+                 break;
+         case 3: peek();
+                 break;
+         case 4: display();
+                 break;
+        default: printf("Invalid input\n");
+                 break;
+    
+     }
+  }
+  while(ch!=0);
+  
+   
+}

@@ -1,0 +1,459 @@
+
+
+1.Write a program to accept a postfix expression as a string and solve it and print it.
+
+Input Format:
+Accept a postfix expression in the string format as input.
+
+
+Output Format:
+Print the solved expression in integer format as output.
+
+
+Constraints:
+1<= string_length<=1000
+
+
+Sample Input 1:
+1 23 45 * + 78 12 / + 4 +
+
+
+Sample Output 1:
+1046
+
+
+Sample Input 2:
+1 2 3 * + 4 5 * + 6 +
+
+
+Sample Output 2:
+33
+
+
+
+2.Write a program to accept a prefix expression as a string and solve it and print it.
+
+
+
+3.Write a program to reverse the word of the given string using Last In Firts Out Mechanism.
+
+Input Format:
+Accept a string as input. 
+
+
+Output Format:
+Print the word reversed string as output.
+
+
+Constraints:
+1<= string_length<= 10000
+
+
+Sample Input 1:
+Live as if you were to die tomorrow
+
+
+Sample Output 1:
+eviL sa fi uoy erew ot eid worromot
+
+
+Sample Input 2:
+It always seems impossible until it's done
+
+
+Sample Output 2:
+tI syawla smees elbissopmi litnu s'ti enod
+
+
+
+
+
+
+4.Write a program to accept a string consists only of '(' , ')' , '{' , '}' , '[' ,']' characters. Do check whether it is balanced or not using stack. If its balanced print "Yes" or "No"
+
+
+Input Format:
+Accept a string as input.
+
+
+Output Format:
+Print "Yes" or "No" based on balancing of paranthesis.
+
+
+Constraints:
+1<= string_length<= 10000
+
+
+Sample Input 1:
+{([])}{}[](())
+
+
+Sample Output 1:
+Yes
+
+
+Sample Input 2:
+{{()(){)]()[
+
+
+Sample Output 2:
+No
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+1.
+#include<stdio.h>
+int push(int *stack , int * top_ptr,int push_val)
+{
+    (*top_ptr)++;
+    if(*top_ptr > 1000)
+        return -1;//stack full
+    stack[(*top_ptr)]=push_val;
+    return 1;
+}
+int pop(int *stack , int * top_ptr)
+{
+    int pop_val;
+    if(*top_ptr ==-1)
+        return 0;//empty stack
+    pop_val=stack[(*top_ptr)];
+    (*top_ptr)--;
+    return pop_val;
+}
+int isEmpty( int  top)
+{
+    if(top ==-1)
+        return 0;//empty stack
+    return 1;//non empty stack
+}
+
+int main()//entry point
+{
+   char str[1000];//="5 70 * 50 + 200 3 * + ";
+   int operand_stack[1000];
+   scanf("%[^\n]s",str);
+   int top=-1;
+   int ind;
+   int val=0;
+   int pop_val1;
+   int pop_val2;
+   int cal_val=0;
+   for(ind=0; str[ind] ; ind+=1)
+   {
+     if(str[ind]>='0'&&str[ind]<='9')
+     {
+         val=val*10+(str[ind]-48);
+     }
+     else if(str[ind]=='*'||str[ind]=='+'||str[ind]=='-'||str[ind]=='%'||str[ind]=='/')
+     {
+             pop_val1=pop(operand_stack,&top);
+             pop_val2=pop(operand_stack,&top);
+            switch(str[ind])
+            {
+                case '+':  
+                cal_val=pop_val2+pop_val1;
+             push(operand_stack,&top,cal_val);
+                 break;
+                case '-':   
+                cal_val=pop_val2-pop_val1;
+             push(operand_stack,&top,cal_val);
+                 break;
+                case '*':   
+                cal_val=pop_val2*pop_val1;
+                 push(operand_stack,&top,cal_val);
+                break;
+                case '/':   
+                cal_val=pop_val2/pop_val1;
+                push(operand_stack,&top,cal_val);
+                break;
+                case '%':   
+                cal_val=pop_val2%pop_val1;
+                 push(operand_stack,&top,cal_val);
+                break;
+            }
+            //printf("%d\n",cal_val);
+            if(str[ind+1])
+                ind++;
+     }
+     else if(str[ind]==' ')
+     {
+         //printf("%d\n",val);
+         push(operand_stack,&top,val);
+         val=0;
+     }
+   }
+   cal_val=pop(operand_stack,&top);
+   printf("%d",cal_val);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2.
+#include<stdio.h>
+int push(int *stack , int * top_ptr,int push_val)
+{
+    (*top_ptr)++;
+    if(*top_ptr > 1000)
+        return -1;//stack full
+    stack[(*top_ptr)]=push_val;
+    return 1;
+}
+int pop(int *stack , int * top_ptr)
+{
+    int pop_val;
+    if(*top_ptr ==-1)
+        return 0;//empty stack
+    pop_val=stack[(*top_ptr)];
+    (*top_ptr)--;
+    return pop_val;
+}
+int isEmpty( int  top)
+{
+    if(top ==-1)
+        return 0;//empty stack
+    return 1;//non empty stack
+}
+
+int main()//entry point
+{
+   char str[1000];//="5 70 * 50 + 200 3 * + ";
+   int operand_stack[1000];//12 * 5 9 - +
+   scanf("%[^\n]s",str);
+   int top=-1;
+   int ind;
+   int val=0;
+   int pop_val1;
+   int pop_val2;
+   int cal_val=0;
+   for(ind=0; str[ind] ; ind+=1)
+   {
+     if(str[ind]>='0'&&str[ind]<='9')
+     {
+         val=val*10+(str[ind]-48);
+     }
+     else if(str[ind]=='*'||str[ind]=='+'||str[ind]=='-'||str[ind]=='%'||str[ind]=='/')
+     {
+             pop_val1=pop(operand_stack,&top);
+             pop_val2=pop(operand_stack,&top);
+            switch(str[ind])
+            {
+                case '+':  
+                cal_val=pop_val1+pop_val2;
+             push(operand_stack,&top,cal_val);
+                 break;
+                case '-':   
+                cal_val=pop_val1-pop_val2;
+             push(operand_stack,&top,cal_val);
+                 break;
+                case '*':   
+                cal_val=pop_val1*pop_val2;
+                 push(operand_stack,&top,cal_val);
+                break;
+                case '/':   
+                cal_val=pop_val1/pop_val2;
+                push(operand_stack,&top,cal_val);
+                break;
+                case '%':   
+                cal_val=pop_val1%pop_val2;
+                 push(operand_stack,&top,cal_val);
+                break;
+            }
+            //printf("%d\n",cal_val);
+            if(str[ind+1])
+                ind++;
+     }
+     else if(str[ind]==' ')
+     {
+         //printf("%d\n",val);
+         push(operand_stack,&top,val);
+         val=0;
+     }
+   }
+   cal_val=pop(operand_stack,&top);
+   printf("%d",cal_val);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+3.
+#include<stdio.h>
+int push(char *stack , int * top_ptr,char push_val)
+{
+    (*top_ptr)++;
+    if(*top_ptr > 1000)
+        return -1;//stack full
+    stack[(*top_ptr)]=push_val;
+    return 1;
+}
+char pop(char *stack , int * top_ptr)
+{
+    char pop_val;
+    if(*top_ptr ==-1)
+        return 0;//empty stack
+    pop_val=stack[(*top_ptr)];
+    (*top_ptr)--;
+    return pop_val;
+}
+int main()//entry point
+{
+   char str[1000];
+   char stack[1000];
+   int top=-1;
+   scanf("%[^\n]s",str);
+   int ind;
+   int word_st_ind;
+   char pop_char;
+   for(word_st_ind=ind=0;str[ind];ind+=1)
+   {
+       if(str[ind]==' ')
+       {
+           while(1)
+           {
+               pop_char=pop(stack,&top);
+               if(pop_char !=0 )
+                str[word_st_ind++]=pop_char;
+               else
+                 break;
+            }
+           word_st_ind=ind+1;
+       }
+       else
+       {
+           push(stack,&top,str[ind]);
+       }
+   }
+    while(1)
+    {
+               pop_char=pop(stack,&top);
+               if(pop_char !=0 )
+                str[word_st_ind++]=pop_char;
+               else
+                 break;
+    }
+    printf("%s",str);
+    return 0;
+}
+
+
+
+
+
+
+
+4.
+#include<stdio.h>
+int push(char *stack , int * top_ptr,char push_val)
+{
+    (*top_ptr)++;
+    if(*top_ptr > 1000)
+        return -1;//stack full
+    stack[(*top_ptr)]=push_val;
+    return 1;
+}
+char pop(char *stack , int * top_ptr)
+{
+    char pop_val;
+    if(*top_ptr ==-1)
+        return 0;//empty stack
+    pop_val=stack[(*top_ptr)];
+    (*top_ptr)--;
+    return pop_val;
+}
+int isEmpty( int  top)
+{
+    if(top ==-1)
+        return 0;//empty stack
+    return 1;//non empty stack
+}
+
+int main()//entry point
+{
+   char str[1000];//="{([])}{}[](())";
+   char stack[1000];
+   scanf("%[^\n]s",str);
+   int top=-1;
+   int ind;
+   char pop_val;
+   for(ind=0; str[ind] ; ind+=1)
+   {
+       if(str[ind]=='('||str[ind]=='['||str[ind]=='{')
+        {
+                    push(stack,&top,str[ind]);
+        }
+        else
+        {
+            pop_val=pop(stack,&top);
+            if(pop_val=='('&&str[ind]==')')
+             continue;
+            if(pop_val=='{'&&str[ind]=='}')
+             continue;
+            if(pop_val=='['&&str[ind]==']')
+             continue;
+            break;
+        }
+   }
+   if(isEmpty(top)==0 && str[ind]==NULL)
+        printf("Yes");
+   else
+        printf("No");
+    return 0;
+}
+
+
+
+
+
+
+

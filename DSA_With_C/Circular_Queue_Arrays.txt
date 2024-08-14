@@ -1,0 +1,202 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#define N 5
+int Q[N];
+int front=-1;
+int rear=-1;
+
+void enQ(int x)
+{
+    if(front==-1 && rear==-1)
+    {
+        front=rear=0;
+        Q[rear]=x;
+    }
+    else if((rear+1)%N==front)
+    {
+        printf("Queue is full\n");
+    }
+    else{
+        rear=(rear+1)%N;
+        Q[rear]=x;
+    }
+}
+
+void DQ()
+{ //front++;
+    if(front==-1 && rear==-1)
+    {
+        printf("Underflow condition\n");
+    }
+    printf("Deleted element is : %d\n",Q[front]);
+    if(rear==front)
+    {
+        front=rear=-1;
+    }
+    else
+    {
+   // printf("Deleted element is : %d\n",Q[front]);
+    front=(front+1)%N;
+    }
+    
+}
+void display()
+{
+    int i=front;
+    if(front==-1 && rear==-1)
+    {
+        printf("Queue is empty\n");
+    }
+    else {
+        while(i!=rear)
+        {
+            printf("%d\n",Q[i]);
+            i=(i+1)%N;
+        }
+        printf("%d\n",Q[rear]);
+    }
+}
+void peek()
+{
+    if(front==-1 && rear==-1)
+    {
+        printf("Queue is empty\n");
+    }
+    else {
+        printf("%d\n",Q[front]);
+    }
+    
+}
+
+
+int main() {
+   enQ(10);
+   enQ(20);
+   enQ(30);
+   enQ(40);
+   enQ(50);
+   printf("1 Completed\n");
+   DQ();
+   DQ();
+   printf("2 Completed\n");
+   enQ(60);
+   enQ(70);
+   display();
+  // printf("3 Completed\n");
+ //  peek();
+  // printf("4 Completed\n");
+
+
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#include <stdio.h>
+#define N 5
+int Q[N];
+int front = -1;
+int rear = -1;
+
+void enQ(int x) {
+    if ((rear + 1) % N == front) {
+        printf("Queue is full\n");
+    } else {
+        if (front == -1 && rear == -1) {
+            front = rear = 0;
+        } else {
+            rear = (rear + 1) % N;
+        }
+        Q[rear] = x;
+    }
+}
+
+void DQ() {
+    if (front == -1 && rear == -1) {
+        printf("Underflow condition\n");
+    } else {
+        printf("Deleted element is : %d\n", Q[front]);
+        if (front == rear) {
+            front = rear = -1;
+        } else {
+            front = (front + 1) % N;
+        }
+    }
+}
+
+void display() {
+    if (front == -1 && rear == -1) {
+        printf("Queue is empty\n");
+    } else {
+        int i = front;
+        while (i != rear) {
+            printf("%d\n", Q[i]);
+            i = (i + 1) % N;
+        }
+        printf("%d\n", Q[rear]);
+    }
+}
+
+void peek() {
+    if (front == -1 && rear == -1) {
+        printf("Queue is empty\n");
+    } else {
+        printf("%d\n", Q[front]);
+    }
+}
+
+int main() {
+    enQ(10);
+    enQ(20);
+    enQ(30);
+    enQ(40);
+    enQ(50);
+    printf("1 Completed\n");
+    DQ();
+    DQ();
+    printf("2 Completed\n");
+    enQ(60);
+    enQ(70);
+    display();
+
+    return 0;
+}

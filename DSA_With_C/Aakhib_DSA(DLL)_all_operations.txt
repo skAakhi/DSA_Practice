@@ -1,0 +1,415 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *pre;
+    struct node *next;
+};
+struct node* create(struct node* head)
+{
+    int x;
+    struct node *newnode,*temp,*tail;//*head=NULL;
+   scanf("%d",&x); 
+while(x!=-1)
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->pre=NULL;
+    newnode->next=NULL;
+    if(head==NULL)
+    {
+        head=tail=newnode;
+    }
+    else
+    {
+        newnode->pre=tail;
+        tail->next=newnode;
+        tail=newnode;
+       
+    }
+    scanf("%d",&x);
+    
+} 
+    return head;
+}
+void Display(struct node *head)
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    
+}
+struct node* InsertBeg(struct node* head, int data)
+{
+    struct node *newnode,*temp;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=head;
+    head->pre=newnode;
+    
+    head=newnode;
+    
+    return head;
+    
+    
+}
+void InsertEnd(struct node* head, int data)
+{
+    struct node *newnode,*temp,*tail;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    if(head==NULL)
+    {
+        head=tail=newnode;
+    }
+    else
+    {//tail=head;
+       // while(tail->next!=NULL)
+        //{
+          //  tail=tail->next;
+        //}
+        tail->next=newnode;
+        newnode->pre=tail;
+       // temp->next->pre=temp;
+        tail=newnode;
+    }
+    
+    
+}
+void InsertLoc(struct node* head, int data)
+{
+    struct node *newnode,*temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    
+    int count=0,i=1,pos;
+    printf("Enter the position\t");
+    scanf("%d",&pos);
+    
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            temp=temp->next;
+            i++;
+        }
+       
+        newnode->next=temp->next;
+        newnode->next->pre=newnode;
+        temp->next=newnode;
+        newnode->pre=temp;
+    }
+}
+struct node* DeleteBeg(struct node* head)
+{
+    struct node* temp=head;
+    
+    head=head->next;
+    head->pre=NULL;
+    free(temp);
+    return head;
+}
+void DeleteEnd(struct node* head)
+{
+    struct node *temp,*prenode,*tail;
+    //temp=head;
+   // while(temp->next!=NULL)
+    //{
+      //  prenode=temp;
+        //temp=temp->next;
+    //}
+    temp=tail;
+    tail->pre->next=NULL;
+    tail=tail->pre;
+   // temp->pre->next=NULL;
+    
+    free(temp);
+}
+void DeleteLoc(struct node *head)
+{
+    struct node *temp=head;
+    int i=1,pos;
+    printf("Enter pos to delete\t");
+    scanf("%d",&pos);
+    while(i<pos)
+    {
+        temp=temp->next;
+        i++;
+    }
+    temp->next->pre=temp->pre;
+    temp->pre->next=temp->next;
+    free(temp);
+    
+    
+}
+struct node *Reverse( struct node *head)
+{
+    struct node *curr=head,*nextnode,*temp;
+    
+    while(curr!=NULL)
+    {
+        temp=curr->pre;
+        curr->pre=curr->next;
+        curr->next=temp;
+        curr=curr->pre;
+    }
+    if (temp != NULL)
+        head = temp->pre;
+}
+   
+   
+   
+
+
+int main() {
+    struct node *head,*temp,*tail;
+
+   head=create(head);
+  // head=InsertBeg(head,10);
+  // InsertEnd(head,50);
+   //InsertLoc(head,150);
+ //  DeleteEnd(head);
+ head= Reverse(head);
+  // head=DeleteBeg(head);
+  //DeleteLoc(head);
+   
+    Display(head);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Updated DLL :
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *pre;
+    struct node *next;
+};
+struct node *head;
+struct node *tail;
+int count =0;
+void create()
+{
+    int x;
+    struct node *newnode,*temp,*tail;//*head=NULL;
+   scanf("%d",&x); 
+while(x!=-1)
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->pre=NULL;
+    newnode->next=NULL;
+    if(head==NULL)
+    {
+        head=tail=newnode;
+    }
+    else
+    {
+        newnode->pre=tail;
+        tail->next=newnode;
+        tail=newnode;
+       
+    }
+    scanf("%d",&x);
+    
+} 
+   // return head;
+}
+void Display()
+{
+    struct node *temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    
+}
+void InsertBeg(int data)
+{
+    struct node *newnode,*temp;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=head;
+    head->pre=newnode;
+    
+    head=newnode;
+    
+    //return head;
+    
+    
+}
+void InsertEnd(int data)
+{
+    struct node *newnode,*temp,*tail;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    if(head==NULL)
+    {
+        head=tail=newnode;
+    }
+    else
+    {
+        tail->next=newnode;
+        newnode->pre=tail;
+        tail=newnode;
+    }
+    
+    
+}
+void InsertLoc(int data)
+{
+    struct node *newnode,*temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    
+    int count=0,i=1,pos;
+    printf("Enter the position\t");
+    scanf("%d",&pos);
+    
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    if(pos>count)
+    {
+        printf("Linked list length is less please enter adequate position");
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            temp=temp->next;
+            i++;
+        }
+       
+        newnode->next=temp->next;
+        newnode->next->pre=newnode;
+        temp->next=newnode;
+        newnode->pre=temp;
+    }
+}
+void DeleteBeg()
+{
+    struct node* temp=head;
+    
+    head=head->next;
+    head->pre=NULL;
+    free(temp);
+   // return head;
+}
+void DeleteEnd()
+{
+    struct node *temp,*prenode,*tail;
+    temp=tail;
+    tail->pre->next=NULL;
+    tail=tail->pre;
+   
+    free(temp);
+}
+void DeleteLoc()
+{
+    struct node *temp=head;
+    int i=1,pos;
+    printf("Enter pos to delete\t");
+    scanf("%d",&pos);
+    while(i<pos)
+    {
+        temp=temp->next;
+        i++;
+    }
+    temp->next->pre=temp->pre;
+    temp->pre->next=temp->next;
+    free(temp);
+    
+    
+}
+void Reverse()
+{
+    struct node *curr=head,*nextnode,*temp;
+    
+    while(curr!=NULL)
+    {
+        temp=curr->pre;
+        curr->pre=curr->next;
+        curr->next=temp;
+        curr=curr->pre;
+    }
+    if (temp != NULL)
+        head = temp->pre;
+}
+   
+   
+   
+
+
+int main() {
+    struct node *head,*temp,*tail;
+
+   create();
+  //InsertBeg(10);
+  // InsertEnd(50);
+ // InsertLoc(150);
+ // DeleteEnd();
+//Reverse();
+// DeleteBeg();
+ // DeleteLoc();
+   
+    Display();
+}
+

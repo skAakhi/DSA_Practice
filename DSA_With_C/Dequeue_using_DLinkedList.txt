@@ -1,0 +1,321 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+
+int data;
+struct node *pre;
+struct node *next;
+};
+
+struct node* front=NULL;
+struct node* rear=NULL;
+
+void ENQFront(int x)
+{
+struct node* newnode;
+
+newnode=(struct node*)malloc(sizeof(struct node));
+newnode->data=x;
+
+if(front==NULL)
+{
+front = rear = newnode;
+
+}
+else
+{
+newnode->next=front;
+front->pre=newnode;
+front=newnode;
+}
+}
+
+
+void ENQRear(int x)
+{
+struct node* newnode;
+newnode=(struct node*)malloc(sizeof(struct node));
+newnode->data=x;
+
+
+if(rear==NULL)
+{
+front = rear = newnode;
+
+}
+else
+{
+rear->next=newnode;
+newnode->pre=rear;
+rear=newnode;
+}
+}
+
+
+
+void DQFront()
+{
+  struct node* temp=front;
+if(front==NULL)
+{
+printf("Underflow condition\n");
+}
+else
+{
+front=front->next;
+front->pre=NULL;
+free(temp);
+}
+}
+
+
+
+
+void DQRear()
+{
+ struct node* temp=rear;
+if(rear==NULL)
+{
+printf("Underflow condition\n");
+}
+else
+{
+rear=rear->pre;
+rear->next=NULL;
+free(temp);
+}
+}
+
+void display()
+{
+struct node* temp=front;
+if(front==NULL)
+{
+printf("UnderFlow condition");
+}
+else{
+   while(temp!=rear)
+   {
+    printf("%d\t",temp->data);
+    temp=temp->next;
+   }
+   printf("%d\n",temp->data);
+
+}
+
+}
+
+void Front()
+{
+    if(front==NULL)
+    {
+        printf("DQueue is empty\n");
+    }
+    else
+    {
+        printf("%d\n",front->data);
+    }
+}
+
+void Rear()
+{
+    if(front==NULL)
+    {
+        printf("DQueue is empty\n");
+    }
+    else
+    {
+        printf("%d\n",rear->data);
+    }
+}
+
+
+int main()
+{
+ENQFront(10);
+ENQFront(20);
+ENQFront(30);
+ENQFront(40);
+
+ENQRear(100);
+ENQRear(200);
+
+DQFront();
+DQRear();
+
+display();
+Front();
+
+Rear();
+
+
+
+}
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Updated DQCLL:[cg]
+-------------------------------------------------------------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node {
+    int data;
+    struct node *pre;
+    struct node *next;
+};
+
+struct node* front = NULL;
+struct node* rear = NULL;
+
+void ENQFront(int x) {
+    struct node* newnode;
+
+    newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data = x;
+    newnode->pre = NULL;
+    newnode->next = NULL;
+
+    if (front == NULL) {
+        front = rear = newnode;
+    } else {
+        newnode->next = front;
+        front->pre = newnode;
+        front = newnode;
+    }
+}
+
+void ENQRear(int x) {
+    struct node* newnode;
+    newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data = x;
+    newnode->pre = NULL;
+    newnode->next = NULL;
+
+    if (rear == NULL) {
+        front = rear = newnode;
+    } else {
+        rear->next = newnode;
+        newnode->pre = rear;
+        rear = newnode;
+    }
+}
+
+void DQFront() {
+    struct node* temp = front;
+    if (front == NULL) {
+        printf("Underflow condition\n");
+    } else {
+        if (front == rear) {  // Only one element in deque
+            front = rear = NULL;
+        } else {
+            front = front->next;
+            front->pre = NULL;
+        }
+        free(temp);
+    }
+}
+
+void DQRear() {
+    struct node* temp = rear;
+    if (rear == NULL) {
+        printf("Underflow condition\n");
+    } else {
+        if (front == rear) {  // Only one element in deque
+            front = rear = NULL;
+        } else {
+            rear = rear->pre;
+            rear->next = NULL;
+        }
+        free(temp);
+    }
+}
+
+void display() {
+    struct node* temp = front;
+    if (front == NULL) {
+        printf("UnderFlow condition\n");
+    } else {
+        while (temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    ENQFront(10);
+    ENQFront(20);
+    ENQFront(30);
+    ENQRear(100);
+    
+    display();
+    
+    // DQFront();
+    // DQRear();
+    
+    // display();
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
